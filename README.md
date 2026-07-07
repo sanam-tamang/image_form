@@ -62,24 +62,6 @@ dependencies:
   image_form: ^0.0.1
 ```
 
-Add permissions to your platform files:
-
-**Android** (`AndroidManifest.xml`):
-```xml
-<uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
-<uses-permission android:name="android.permission.CAMERA"/>
-```
-
-**iOS** (`Info.plist`):
-```xml
-<key>NSPhotoLibraryUsageDescription</key>
-<string>Used to pick profile and course images.</string>
-<key>NSCameraUsageDescription</key>
-<string>Used to take photos for your profile.</string>
-```
-
----
-
 ## Quick start
 
 ```dart

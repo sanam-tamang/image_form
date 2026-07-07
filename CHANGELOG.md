@@ -1,3 +1,11 @@
+## 0.0.2
+
+- Updated package version
+- Remove unncesary read me
+
+
+
+
 ## 0.0.1
 
 - Initial release.
