@@ -73,33 +73,33 @@ class ImageFormField extends FormField<ImageItem> {
     // ── Services (injectable for testing) ──────────────────────────────────
     ImagePickerService? pickerService,
     ImageCropService? cropService,
-  })  : assert(
-          controller == null || initialItem == null,
-          'Provide either controller or initialItem, not both.',
-        ),
-        assert(
-          controller == null || initialUrl == null,
-          'Provide either controller or initialUrl, not both.',
-        ),
-        super(
-          initialValue: controller?.value ??
-              initialItem ??
-              (initialUrl != null
-                  ? NetworkImageItem(url: initialUrl)
-                  : const EmptyImageItem()),
-          builder: (FormFieldState<ImageItem> state) {
-            return _ImageFormFieldBody(
-              state: state,
-              controller: controller,
-              config: config,
-              decoration: decoration,
-              onChanged: onChanged,
-              pickerService:
-                  pickerService ?? ImagePickerService(),
-              cropService: cropService ?? const ImageCropService(),
-            );
-          },
-        );
+  }) : assert(
+         controller == null || initialItem == null,
+         'Provide either controller or initialItem, not both.',
+       ),
+       assert(
+         controller == null || initialUrl == null,
+         'Provide either controller or initialUrl, not both.',
+       ),
+       super(
+         initialValue:
+             controller?.value ??
+             initialItem ??
+             (initialUrl != null
+                 ? NetworkImageItem(url: initialUrl)
+                 : const EmptyImageItem()),
+         builder: (FormFieldState<ImageItem> state) {
+           return _ImageFormFieldBody(
+             state: state,
+             controller: controller,
+             config: config,
+             decoration: decoration,
+             onChanged: onChanged,
+             pickerService: pickerService ?? ImagePickerService(),
+             cropService: cropService ?? const ImageCropService(),
+           );
+         },
+       );
 
   final ImageFieldController? controller;
   final ImageFieldConfig config;
@@ -216,7 +216,8 @@ class _ImageFormFieldBodyState extends State<_ImageFormFieldBody> {
         // ── Optional label ───────────────────────────────────────────────────
         if (_decoration.label != null) ...[
           DefaultTextStyle(
-            style: _decoration.labelStyle ??
+            style:
+                _decoration.labelStyle ??
                 theme.textTheme.bodyMedium!.copyWith(
                   color: hasError
                       ? theme.colorScheme.error
@@ -238,7 +239,8 @@ class _ImageFormFieldBodyState extends State<_ImageFormFieldBody> {
           const SizedBox(height: 4),
           Text(
             _decoration.helperText!,
-            style: _decoration.helperStyle ??
+            style:
+                _decoration.helperStyle ??
                 theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
@@ -250,7 +252,8 @@ class _ImageFormFieldBodyState extends State<_ImageFormFieldBody> {
           const SizedBox(height: 4),
           Text(
             _state.errorText!,
-            style: _decoration.errorStyle ??
+            style:
+                _decoration.errorStyle ??
                 theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.error,
                 ),
@@ -263,7 +266,8 @@ class _ImageFormFieldBodyState extends State<_ImageFormFieldBody> {
   Widget _buildImageStack(BuildContext context, bool hasError) {
     // Resolve dimensions
     final width = _config.width;
-    final height = _config.height ??
+    final height =
+        _config.height ??
         (width != null && _config.aspectRatio != null
             ? width / _config.aspectRatio!
             : width);
@@ -271,7 +275,10 @@ class _ImageFormFieldBodyState extends State<_ImageFormFieldBody> {
     // Error border override
     final effectiveBorder = hasError
         ? (_decoration.errorBorder ??
-            Border.all(color: Theme.of(context).colorScheme.error, width: 1.5))
+              Border.all(
+                color: Theme.of(context).colorScheme.error,
+                width: 1.5,
+              ))
         : _decoration.border;
 
     final display = ImageDisplayWidget(
@@ -287,10 +294,7 @@ class _ImageFormFieldBodyState extends State<_ImageFormFieldBody> {
       clipBehavior: Clip.none,
       children: [
         // Hero wrap for tap-to-view animation
-        Hero(
-          tag: _heroTag,
-          child: display,
-        ),
+        Hero(tag: _heroTag, child: display),
 
         // Edit icon overlay
         EditOverlayWidget(
@@ -306,10 +310,10 @@ class _ImageFormFieldBodyState extends State<_ImageFormFieldBody> {
     return GestureDetector(
       onTap: _enabled
           ? (_config.enableEditOnTap
-              ? _onEditTapped
-              : (_config.enableTapToView && _currentItem.hasImage
-                  ? _onImageTapped
-                  : null))
+                ? _onEditTapped
+                : (_config.enableTapToView && _currentItem.hasImage
+                      ? _onImageTapped
+                      : null))
           : null,
       child: stack,
     );
@@ -383,11 +387,7 @@ class _ImageFormFieldBodyState extends State<_ImageFormFieldBody> {
 
   void _onImageTapped() {
     if (!_currentItem.hasImage) return;
-    ImageViewerPage.show(
-      context,
-      item: _currentItem,
-      heroTag: _heroTag,
-    );
+    ImageViewerPage.show(context, item: _currentItem, heroTag: _heroTag);
   }
 
   void _updateItem(ImageItem item) {

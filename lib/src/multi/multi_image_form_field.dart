@@ -54,9 +54,7 @@ class MultiImageFormField extends FormField<List<ImageItem>> {
     this.maxCount = 10,
 
     // ── Config & decoration ────────────────────────────────────────────────
-    this.config = const ImageFieldConfig(
-      shape: ImageFieldShape.roundedRect,
-    ),
+    this.config = const ImageFieldConfig(shape: ImageFieldShape.roundedRect),
     this.decoration = const ImageFieldDecoration(),
 
     // ── Layout ─────────────────────────────────────────────────────────────
@@ -78,31 +76,32 @@ class MultiImageFormField extends FormField<List<ImageItem>> {
     ImagePickerService? pickerService,
     ImageCropService? cropService,
   }) : super(
-          initialValue: controller?.value ??
-              initialItems ??
-              initialUrls
-                  ?.map((u) => NetworkImageItem(url: u) as ImageItem)
-                  .toList() ??
-              [],
-          builder: (FormFieldState<List<ImageItem>> state) {
-            return _MultiImageFormFieldBody(
-              state: state,
-              controller: controller,
-              config: config,
-              decoration: decoration,
-              layout: layout,
-              gridCrossAxisCount: gridCrossAxisCount,
-              gridMainAxisSpacing: gridMainAxisSpacing,
-              gridCrossAxisSpacing: gridCrossAxisSpacing,
-              itemHeight: itemHeight,
-              allowReorder: allowReorder,
-              maxCount: maxCount,
-              onChanged: onChanged,
-              pickerService: pickerService ?? ImagePickerService(),
-              cropService: cropService ?? const ImageCropService(),
-            );
-          },
-        );
+         initialValue:
+             controller?.value ??
+             initialItems ??
+             initialUrls
+                 ?.map((u) => NetworkImageItem(url: u) as ImageItem)
+                 .toList() ??
+             [],
+         builder: (FormFieldState<List<ImageItem>> state) {
+           return _MultiImageFormFieldBody(
+             state: state,
+             controller: controller,
+             config: config,
+             decoration: decoration,
+             layout: layout,
+             gridCrossAxisCount: gridCrossAxisCount,
+             gridMainAxisSpacing: gridMainAxisSpacing,
+             gridCrossAxisSpacing: gridCrossAxisSpacing,
+             itemHeight: itemHeight,
+             allowReorder: allowReorder,
+             maxCount: maxCount,
+             onChanged: onChanged,
+             pickerService: pickerService ?? ImagePickerService(),
+             cropService: cropService ?? const ImageCropService(),
+           );
+         },
+       );
 
   final MultiImageFieldController? controller;
   final int minCount;
@@ -117,8 +116,7 @@ class MultiImageFormField extends FormField<List<ImageItem>> {
   final bool allowReorder;
 
   @override
-  FormFieldState<List<ImageItem>> createState() =>
-      _MultiImageFormFieldState();
+  FormFieldState<List<ImageItem>> createState() => _MultiImageFormFieldState();
 }
 
 // ── State ─────────────────────────────────────────────────────────────────────
@@ -201,8 +199,7 @@ class _MultiImageFormFieldBody extends StatefulWidget {
       _MultiImageFormFieldBodyState();
 }
 
-class _MultiImageFormFieldBodyState
-    extends State<_MultiImageFormFieldBody> {
+class _MultiImageFormFieldBodyState extends State<_MultiImageFormFieldBody> {
   int? _loadingIndex;
 
   FormFieldState<List<ImageItem>> get _state => widget.state;
@@ -224,7 +221,8 @@ class _MultiImageFormFieldBodyState
         // ── Label ──────────────────────────────────────────────────────────
         if (_decoration.label != null) ...[
           DefaultTextStyle(
-            style: _decoration.labelStyle ??
+            style:
+                _decoration.labelStyle ??
                 theme.textTheme.bodyMedium!.copyWith(
                   color: hasError
                       ? theme.colorScheme.error
@@ -246,7 +244,8 @@ class _MultiImageFormFieldBodyState
           const SizedBox(height: 4),
           Text(
             _decoration.helperText!,
-            style: _decoration.helperStyle ??
+            style:
+                _decoration.helperStyle ??
                 theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
@@ -256,7 +255,8 @@ class _MultiImageFormFieldBodyState
           const SizedBox(height: 4),
           Text(
             _state.errorText!,
-            style: _decoration.errorStyle ??
+            style:
+                _decoration.errorStyle ??
                 theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.error,
                 ),
@@ -339,8 +339,8 @@ class _MultiImageFormFieldBodyState
       key: ValueKey('slot_${slot.index}'),
       onTap: _enabled
           ? (_config.enableTapToView && item.hasImage
-              ? () => _onViewTapped(item, heroTag)
-              : () => _onSlotTapped(slot.index))
+                ? () => _onViewTapped(item, heroTag)
+                : () => _onSlotTapped(slot.index))
           : null,
       onLongPress: _enabled ? () => _onSlotTapped(slot.index) : null,
       child: SizedBox(
@@ -655,11 +655,7 @@ class ReorderableWrap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: spacing,
-      runSpacing: runSpacing,
-      children: children,
-    );
+    return Wrap(spacing: spacing, runSpacing: runSpacing, children: children);
   }
 }
 

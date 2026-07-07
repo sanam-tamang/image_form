@@ -1,5 +1,3 @@
-
-
 import '../models/image_item.dart';
 
 /// Built-in validator factories for [ImageFormField] and [MultiImageFormField].
@@ -69,13 +67,14 @@ class ImageValidators {
     List<String> allowed, {
     String? message,
   }) {
-    final lower = allowed.map((e) => e.toLowerCase().replaceAll('.', '')).toSet();
+    final lower = allowed
+        .map((e) => e.toLowerCase().replaceAll('.', ''))
+        .toSet();
     return (item) {
       if (item is! LocalImageItem) return null;
       final ext = item.file.path.split('.').last.toLowerCase();
       if (!lower.contains(ext)) {
-        return message ??
-            'Only ${lower.join(', ')} files are allowed.';
+        return message ?? 'Only ${lower.join(', ')} files are allowed.';
       }
       return null;
     };
@@ -85,8 +84,7 @@ class ImageValidators {
   /// Return a non-null String to fail, null to pass.
   static String? Function(ImageItem?) custom(
     String? Function(ImageItem? item) validator,
-  ) =>
-      validator;
+  ) => validator;
 
   /// Compose multiple single-image validators — runs all and returns
   /// the first error message, or null if all pass.
@@ -141,6 +139,5 @@ class ImageValidators {
   /// Convenience — required for multi: at least 1 image.
   static String? Function(List<ImageItem>?) multiRequired({
     String message = 'Please add at least one image.',
-  }) =>
-      multi(minCount: 1, minMessage: message);
+  }) => multi(minCount: 1, minMessage: message);
 }

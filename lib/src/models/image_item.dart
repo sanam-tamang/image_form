@@ -30,24 +30,15 @@ sealed class ImageItem {
 /// Rendered via CachedNetworkImage when caching is enabled,
 /// plain Image.network otherwise.
 final class NetworkImageItem extends ImageItem {
-  const NetworkImageItem({
-    required this.url,
-    this.headers,
-  });
+  const NetworkImageItem({required this.url, this.headers});
 
   final String url;
 
   /// Optional HTTP headers — useful for authenticated image endpoints.
   final Map<String, String>? headers;
 
-  NetworkImageItem copyWith({
-    String? url,
-    Map<String, String>? headers,
-  }) =>
-      NetworkImageItem(
-        url: url ?? this.url,
-        headers: headers ?? this.headers,
-      );
+  NetworkImageItem copyWith({String? url, Map<String, String>? headers}) =>
+      NetworkImageItem(url: url ?? this.url, headers: headers ?? this.headers);
 
   @override
   bool operator ==(Object other) =>

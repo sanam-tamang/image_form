@@ -36,15 +36,11 @@ class EditOverlayWidget extends StatelessWidget {
         padding: decoration.editIconPadding,
         decoration: BoxDecoration(
           color: decoration.editIconBackgroundColor ?? Colors.black54,
-          borderRadius:
-              BorderRadius.circular(decoration.editIconBorderRadius),
+          borderRadius: BorderRadius.circular(decoration.editIconBorderRadius),
         ),
-        child: decoration.editIcon ??
-            const Icon(
-              Icons.camera_alt,
-              size: 18,
-              color: Colors.white,
-            ),
+        child:
+            decoration.editIcon ??
+            const Icon(Icons.camera_alt, size: 18, color: Colors.white),
       ),
     );
   }
@@ -54,34 +50,32 @@ class EditOverlayWidget extends StatelessWidget {
 
     return switch (config.editIconPosition) {
       EditIconPosition.bottomRight => Positioned(
-          bottom: offset,
-          right: offset,
-          child: icon,
-        ),
+        bottom: offset,
+        right: offset,
+        child: icon,
+      ),
       EditIconPosition.bottomCenter => Positioned(
-          bottom: offset,
-          left: 0,
-          right: 0,
-          child: Center(child: icon),
-        ),
+        bottom: offset,
+        left: 0,
+        right: 0,
+        child: Center(child: icon),
+      ),
       EditIconPosition.bottomLeft => Positioned(
-          bottom: offset,
-          left: offset,
-          child: icon,
-        ),
+        bottom: offset,
+        left: offset,
+        child: icon,
+      ),
       EditIconPosition.topRight => Positioned(
-          top: offset,
-          right: offset,
-          child: icon,
-        ),
+        top: offset,
+        right: offset,
+        child: icon,
+      ),
       EditIconPosition.topLeft => Positioned(
-          top: offset,
-          left: offset,
-          child: icon,
-        ),
-      EditIconPosition.center => Positioned.fill(
-          child: Center(child: icon),
-        ),
+        top: offset,
+        left: offset,
+        child: icon,
+      ),
+      EditIconPosition.center => Positioned.fill(child: Center(child: icon)),
     };
   }
 }

@@ -32,10 +32,9 @@ import '../models/image_item.dart';
 /// Always call [dispose] when the controller is no longer needed.
 class ImageFieldController extends ChangeNotifier
     implements ValueListenable<ImageItem> {
-  ImageFieldController({
-    ImageItem? initialItem,
-  })  : _initialItem = initialItem ?? const EmptyImageItem(),
-        _current = initialItem ?? const EmptyImageItem();
+  ImageFieldController({ImageItem? initialItem})
+    : _initialItem = initialItem ?? const EmptyImageItem(),
+      _current = initialItem ?? const EmptyImageItem();
 
   final ImageItem _initialItem;
   ImageItem _current;

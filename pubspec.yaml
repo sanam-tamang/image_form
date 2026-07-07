@@ -7,7 +7,7 @@ description: >
   logos, banners, certificates, and more.
 version: 0.0.1
 homepage: https://github.com/sanam-tamang/image_form
-
+repository: https://github.com/sanam-tamang/image_form
 environment:
   sdk: ^3.10.3
   flutter: ">=1.17.0"

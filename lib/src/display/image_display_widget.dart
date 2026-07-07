@@ -38,17 +38,17 @@ class ImageDisplayWidget extends StatelessWidget {
 
     Widget child = switch (item) {
       NetworkImageItem(:final url, :final headers) => _buildNetwork(
-          context,
-          url: url,
-          headers: headers,
-        ),
+        context,
+        url: url,
+        headers: headers,
+      ),
       LocalImageItem(:final file) => Image.file(
-          file,
-          fit: config.fit,
-          width: resolvedWidth,
-          height: resolvedHeight,
-          errorBuilder: (_, _, _) => _buildError(context),
-        ),
+        file,
+        fit: config.fit,
+        width: resolvedWidth,
+        height: resolvedHeight,
+        errorBuilder: (_, _, _) => _buildError(context),
+      ),
       EmptyImageItem() => _buildPlaceholder(context),
     };
 
@@ -61,7 +61,8 @@ class ImageDisplayWidget extends StatelessWidget {
           Container(
             color: decoration.overlayColor ?? Colors.black26,
             alignment: Alignment.center,
-            child: decoration.loadingWidget ??
+            child:
+                decoration.loadingWidget ??
                 CircularProgressIndicator(
                   strokeWidth: 2,
                   color: theme.colorScheme.onPrimary,
@@ -79,7 +80,8 @@ class ImageDisplayWidget extends StatelessWidget {
       width: resolvedWidth,
       height: resolvedHeight,
       decoration: BoxDecoration(
-        color: decoration.backgroundColor ??
+        color:
+            decoration.backgroundColor ??
             theme.colorScheme.surfaceContainerHighest,
         shape: config.shape == ImageFieldShape.circle
             ? BoxShape.circle
@@ -87,9 +89,7 @@ class ImageDisplayWidget extends StatelessWidget {
         borderRadius: config.shape == ImageFieldShape.circle
             ? null
             : _borderRadius(),
-        border: decoration.border != null
-            ? decoration.border as Border?
-            : null,
+        border: decoration.border != null ? decoration.border as Border? : null,
       ),
       child: child,
     );
@@ -111,7 +111,8 @@ class ImageDisplayWidget extends StatelessWidget {
         fit: config.fit,
         width: config.width,
         height: config.height,
-        placeholder: (_, _) => decoration.loadingWidget ??
+        placeholder: (_, _) =>
+            decoration.loadingWidget ??
             const Center(child: CircularProgressIndicator(strokeWidth: 2)),
         errorWidget: (context, _, _) => _buildError(context),
         fadeInDuration: const Duration(milliseconds: 200),
@@ -164,9 +165,9 @@ class ImageDisplayWidget extends StatelessWidget {
     return switch (config.shape) {
       ImageFieldShape.circle => ClipOval(child: child),
       ImageFieldShape.roundedRect => ClipRRect(
-          borderRadius: BorderRadius.circular(config.borderRadius),
-          child: child,
-        ),
+        borderRadius: BorderRadius.circular(config.borderRadius),
+        child: child,
+      ),
       ImageFieldShape.rectangle => ClipRect(child: child),
       ImageFieldShape.square => ClipRect(child: child),
     };
@@ -174,8 +175,7 @@ class ImageDisplayWidget extends StatelessWidget {
 
   BorderRadius? _borderRadius() {
     return switch (config.shape) {
-      ImageFieldShape.roundedRect =>
-        BorderRadius.circular(config.borderRadius),
+      ImageFieldShape.roundedRect => BorderRadius.circular(config.borderRadius),
       _ => BorderRadius.zero,
     };
   }

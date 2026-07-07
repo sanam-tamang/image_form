@@ -40,8 +40,7 @@ final class MultiPickError extends MultiPickResult {
 /// Inject a custom instance during tests to mock file picking without
 /// real device hardware.
 class ImagePickerService {
-  ImagePickerService({ImagePicker? picker})
-      : _picker = picker ?? ImagePicker();
+  ImagePickerService({ImagePicker? picker}) : _picker = picker ?? ImagePicker();
 
   final ImagePicker _picker;
 

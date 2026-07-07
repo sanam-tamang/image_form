@@ -28,9 +28,9 @@ class MultiImageFieldController extends ChangeNotifier
     this.minCount = 0,
     this.maxCount = 10,
   }) : assert(
-          initialUrls == null || initialItems == null,
-          'Provide either initialUrls or initialItems, not both.',
-        ) {
+         initialUrls == null || initialItems == null,
+         'Provide either initialUrls or initialItems, not both.',
+       ) {
     if (initialItems != null) {
       _items = List.of(initialItems);
     } else if (initialUrls != null) {
