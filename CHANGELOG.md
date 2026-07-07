@@ -1,4 +1,11 @@
-## 0.0.2
+## 0.1.1
+
+- Cleaup code 
+
+
+
+
+## 0.1.0
 
 - Updated package version
 - Remove unncesary read me
